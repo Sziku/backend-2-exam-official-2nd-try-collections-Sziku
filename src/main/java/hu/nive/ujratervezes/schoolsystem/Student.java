@@ -14,4 +14,15 @@ public class Student {
         this.subjects = subjects;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public Set<String> getSubjects() {
+        return subjects;
+    }
 }
