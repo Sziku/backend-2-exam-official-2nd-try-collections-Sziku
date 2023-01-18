@@ -2,9 +2,7 @@ package hu.nive.ujratervezes.schoolsystem;
 
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class SchoolSystem {
 
@@ -24,16 +22,33 @@ public class SchoolSystem {
     }
 
     public void deleteSubjectFromAllStudents(String subject){
-        students.forEach(Student -> Student.getSubjects().remove(subject));
+        for (Student student : students){
+            Set<String> subjectList = new HashSet<>(student.getSubjects());
+            subjectList.remove(subject);
+            student.setSubjects(subjectList);
+        }
+
     }
 
     public List<Student> getListOfStudentsByStartDate(LocalDate date){
-        return null;
+        return students.stream().filter(Student -> Student.getStartDate().equals(date)).toList();
     }
 
 
     public Map<LocalDate, List<Student>> getListOfStudentsGroupByStartDate(){
-        return null;
+        Map<LocalDate, List<Student>> resultMaps = new HashMap<>();
+        for(Student student : students){
+            if(!resultMaps.containsKey(student.getStartDate())){
+                List<Student> studentsStartDate = new ArrayList<>();
+                studentsStartDate.add(student);
+                resultMaps.put(student.getStartDate(), studentsStartDate);
+            } else {
+                List<Student> studentsStartDate = resultMaps.get(student.getStartDate());
+                studentsStartDate.add(student);
+                resultMaps.put(student.getStartDate(), studentsStartDate );
+            }
+        }
+        return resultMaps;
     }
 
     public Set<String> getCommonSubjectsAmongStudents(Set<String> studentNames) {

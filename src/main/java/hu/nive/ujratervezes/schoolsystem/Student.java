@@ -1,6 +1,7 @@
 package hu.nive.ujratervezes.schoolsystem;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 public class Student {
@@ -24,5 +25,9 @@ public class Student {
 
     public Set<String> getSubjects() {
         return subjects;
+    }
+
+    public void setSubjects(Set<String> subjects) {
+        this.subjects = subjects;
     }
 }
